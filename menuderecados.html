@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu_de_Recados</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/avalfinal2.css">
+</head>
+<body>
+    <h1>Meus Recados</h1>
+    <input class="descrecados" type="" class="form-control" id="descrecados" placeholder="Descrição">
+    <input class="detrecados" type="" class="form-control" id="detrecados" placeholder="Detalhamento">
+    <button id="botaosalvar" onclick=create() type="submit" class="btn btn-primary">Salvar</button>
+    <table id='tabela' class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Detalhamento</th>
+            <th scope="col">Ação</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <!-- <tr>
+            <th scope="col"></th>
+            <td><button id="botaoapagar" type="submit" class="btn btn-danger">Apagar</button><button id="botaoeditar"  type="submit" class="btn btn-success">Editar</button></td>
+          </tr>           -->
+        </tbody>
+      </table>
+        <div class="modal" style="display: none;">
+      
+          <h3>-Editar Recado-</h3>
+          <p id="pID">ID</p>
+          <input id="editID" disabled hidden type="number">
+          <p id="paragrafodescricao">Descrição:</p>
+          <input id="editardescricao" placeholder="Editar Descrição" type="text">
+          <p id="paragrafodetalhamento">Detalhamento:</p>
+          <input type="text" id="editardetalhamento" placeholder="Editar Detalhamento">
+          <button id="salvaralteracoes" onclick="update(document.getElementById('editID').value)" type="button" class="btn btn-info">Salvar Alterações</button>
+          <button id="fechar" onclick=fechar() type="button" class="btn btn-danger">Cancelar</button>
+      </div>
+  
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="/js/avalfinal2.js"></script>
+    
+</body>
+</html>
+

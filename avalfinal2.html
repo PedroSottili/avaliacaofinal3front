@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>Avaliacao_final</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/avalfinal2.css">
+</head>
+<body>
+    <img id="image"src="./images/PlainJealousBandicoot-size_restricted.gif" alt="">
+    <form class="login ">
+        <div class="form-group">
+          <label id="entrarnosistema"for="exampleInputEmail1">ENTRAR NO SISTEMA DE RECADOS</label>
+          <input class="username col-12" class="form-control" id="exampleInputEmail1"  placeholder="User name">
+          <small id="emailHelp" class="form-text text-muted"></small>
+        </div>
+        <div class="form-group">
+          <label class="caixasenha" for="exampleInputPassword1"></label>
+          <input class="senha col-12" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <input class="senha col-12" type="password" class="form-control" id="exampleInputPassword2" placeholder="Repeat Password">
+        </div>
+        <div class="form-group form-check">
+          <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"> -->
+          <label class="form-check-label" for="exampleCheck1"></label>
+        </div>
+        <button id="botao" onclick=acesso(event) type="submit" class="btn btn-success">ENTRAR</button>
+        <button id="botao2" onclick=ContaCriada(event) type="submit" class="btn btn-success">CRIAR CONTA AGORA</button>
+      </form>
+      <a id="crconta" href="#" onclick=CriacaoDaConta()>CRIAR CONTA</a>
+      
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script src="./js/avalfinal2.js"></script>
+</body>
+</html>
