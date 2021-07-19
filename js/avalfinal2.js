@@ -1,40 +1,9 @@
 axios.defaults.baseURL = 'http://localhost:8080';
 
-// axios.get(('/dados'))
-// .then(response => {
-// 	response.data.forEach(item => {console.log(item)});
-// })
-// .catch(error => console.log(error));
 
-async function acesso(event) {
-	event.preventDefault();
 
-	const armazenamento = JSON.parse(localStorage.getItem("armazenar"));
-	const valueUsername = document.getElementById("exampleInputEmail1").value;
-	const valuePassword = document.getElementById("exampleInputPassword1").value;
-	const valueObjeto = {
-	  username: valueUsername,
-	  password: valuePassword,
-	};
-	for (let arm of armazenamento) {
-	  if (valueObjeto.username == arm.username && valueObjeto.password == arm.password) {
-		alert("Você está sendo conectado...");
-		NovaAba("/menuderecados.html");
-	  } else {
-		alert("Usuário e senha incorretos, tente novamente");
-	  }
-	}
 
-	const {data}=await axios.get('/dados', {
-		id
-	});
-
-	console.log(data);
-	}
-
-async function ContaCriada(event) {
-	event.preventDefault();
-
+async function ContaCriada() {
 	const password = document.getElementById("password").value
   	const rptpassword = document.getElementById("exampleInputPassword2").value;
   	const username = document.getElementById("username").value;
@@ -63,7 +32,7 @@ async function ContaCriada(event) {
     password.value = "";
     rptpassword.value = "";
   }
-const { data } = await axios.post('/dados', {
+const { data } = await axios.post('/conta', {
 	  username,
 	  password
   });
@@ -84,54 +53,23 @@ function CriacaoDaConta() {
 
 const armazenar = [];
 
-// function ContaCriada() {
-//   const password = document.getElementById("password");
-//   const rptpassword = document.getElementById("exampleInputPassword2");
-//   const username = document.getElementById("username");
-//   if (rptpassword.value == password.value) {
-//     alert("Conta criada com sucesso!");
-//     const dados = {
-//       username: username.value,
-//       password: password.value,
-//     };
-//     armazenar.push(dados);
-//     localStorage.setItem("armazenar", JSON.stringify(armazenar));
-//     username.value = "";
-//     password.value = "";
-//     rptpassword.value = "";
-//     document.getElementById("textocrconta").id = "entrarnosistema";
-//     document.getElementById("entrarnosistema").innerHTML = "ENTRAR NO SISTEMA DE RECADOS";
-//     document.getElementById("username").id = "exampleInputEmail1";
-//     document.getElementById("password").id = "exampleInputPassword1";
-//     document.getElementById("exampleInputPassword2").style.display = "";
-//     document.getElementById("botao2").style.display = "none";
-//     document.getElementById("botao").style.display = "block";
-//     document.getElementById("crconta").style.display = "block";
-//   } else {
-//     alert("Erro: digite as informações corretamente");
-//     username.value = "";
-//     password.value = "";
-//     rptpassword.value = "";
-//   }
-// }
-
-// function acesso() {
-//   const armazenamento = JSON.parse(localStorage.getItem("armazenar"));
-//   const valueUsername = document.getElementById("exampleInputEmail1").value;
-//   const valuePassword = document.getElementById("exampleInputPassword1").value;
-//   const valueObjeto = {
-//     username: valueUsername,
-//     password: valuePassword,
-//   };
-//   for (let arm of armazenamento) {
-//     if (valueObjeto.username == arm.username && valueObjeto.password == arm.password) {
-//       alert("Você está sendo conectado...");
-//       NovaAba("/menuderecados.html");
-//     } else {
-//       alert("Usuário e senha incorretos, tente novamente");
-//     }
-//   }
-// }
+function acesso() {
+  const armazenamento = JSON.parse(localStorage.getItem("armazenar"));
+  const valueUsername = document.getElementById("exampleInputEmail1").value;
+  const valuePassword = document.getElementById("exampleInputPassword1").value;
+  const valueObjeto = {
+    username: valueUsername,
+    password: valuePassword,
+  };
+  for (let arm of armazenamento) {
+    if (valueObjeto.username == arm.username && valueObjeto.password == arm.password) {
+      alert("Você está sendo conectado...");
+      NovaAba("/menuderecados.html");
+    } else {
+      alert("Usuário e senha incorretos, tente novamente");
+    }
+  }
+}
 
 function NovaAba(url) {
   const win = window.open(url, "_blank");
@@ -140,27 +78,58 @@ function NovaAba(url) {
 
 const recados = [];
 
-function create() {
-  const DescricaoValue = document.getElementById("descrecados").value;
-  const DetalhamentoValue = document.getElementById("detrecados").value;
-  const user = {
+async function create(event) {
+	event.preventDefault();
+
+	const DescricaoValue = document.getElementById("descrecados").value;
+	const DetalhamentoValue = document.getElementById("detrecados").value;
+	const user = {
     ID: recados.length > 0 ? recados[recados.length - 1].ID + 1 : 1,
     descricao: DescricaoValue,
     detalhamento: DetalhamentoValue,
   };
-  recados.push(user);
-  localStorage.setItem("recado", JSON.stringify(recados));
-  JSON.parse(localStorage.getItem("recados"));
-  const novaLinha = document.createElement("tr");
-  novaLinha.id = recados[recados.length - 1].ID;
-  novaLinha.innerHTML = `
-	  <th scope="row">${user.ID}</th>
-	  <td id="tddescricao${user.ID}">${user.descricao}</td>
-	  <td id="tddetalhamento${user.ID}">${user.detalhamento}</td>
-	  <td><button id="botaoapagar" onclick=Delete(${user.ID}) type="submit" class="btn btn-danger">Apagar</button><button id="botaoeditar" onclick=AbrirModal(${user.ID}) type="submit" class="btn btn-success" data-toggle="modal">Editar</button></td>`;
+  	recados.push(user);
+  	localStorage.setItem("recado", JSON.stringify(recados));
+  	JSON.parse(localStorage.getItem("recados"));
+	  const novaLinha = document.createElement("tr");
+	  novaLinha.id = recados[recados.length - 1].ID;
+	  novaLinha.innerHTML = `
+	  	  <th scope="row">${user.ID}</th>
+	  	  <td id="tddescricao${user.ID}">${user.descricao}</td>
+	  	  <td id="tddetalhamento${user.ID}">${user.detalhamento}</td>
+	 	  <td><button id="botaoapagar" onclick=Delete(${user.ID}) type="submit" class="btn btn-danger">Apagar</button><button id="botaoeditar" onclick=AbrirModal(${user.ID}) type="submit" class="btn btn-success" data-toggle="modal">Editar</button></td>`;
+	  
+	    document.querySelector("#tabela>tbody").appendChild(novaLinha);
 
-  document.querySelector("#tabela>tbody").appendChild(novaLinha);
+	const {data} = await axios.post('/crud', {
+		descricao,
+		detalhamento
+	});
+  
+	console.log(data);
 }
+
+// function create() {
+//   const DescricaoValue = document.getElementById("descrecados").value;
+//   const DetalhamentoValue = document.getElementById("detrecados").value;
+//   const user = {
+//     ID: recados.length > 0 ? recados[recados.length - 1].ID + 1 : 1,
+//     descricao: DescricaoValue,
+//     detalhamento: DetalhamentoValue,
+//   };
+//   recados.push(user);
+//   localStorage.setItem("recado", JSON.stringify(recados));
+//   JSON.parse(localStorage.getItem("recados"));
+//   const novaLinha = document.createElement("tr");
+//   novaLinha.id = recados[recados.length - 1].ID;
+//   novaLinha.innerHTML = `
+// 	  <th scope="row">${user.ID}</th>
+// 	  <td id="tddescricao${user.ID}">${user.descricao}</td>
+// 	  <td id="tddetalhamento${user.ID}">${user.detalhamento}</td>
+// 	  <td><button id="botaoapagar" onclick=Delete(${user.ID}) type="submit" class="btn btn-danger">Apagar</button><button id="botaoeditar" onclick=AbrirModal(${user.ID}) type="submit" class="btn btn-success" data-toggle="modal">Editar</button></td>`;
+
+//   document.querySelector("#tabela>tbody").appendChild(novaLinha);
+// }
 
 function Delete(id) {
   recados.forEach((recado) => recado.ID == id ? recados.splice(recados.indexOf(recado), 1) : 0);
