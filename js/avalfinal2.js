@@ -101,10 +101,7 @@ async function create(event) {
 	  
 	    document.querySelector("#tabela>tbody").appendChild(novaLinha);
 
-	const {data} = await axios.post('/crud', {
-		descricao,
-		detalhamento
-	});
+	const {data} = await axios.post('/crud', user);
   
 	console.log(data);
 }
