@@ -4,7 +4,7 @@ axios.defaults.baseURL = 'http://localhost:8080';
 
 
 async function ContaCriada() {
-	const password = document.getElementById("password").value
+	  const password = document.getElementById("password").value
   	const rptpassword = document.getElementById("exampleInputPassword2").value;
   	const username = document.getElementById("username").value;
   	if (rptpassword.value == password.value) {
@@ -32,12 +32,12 @@ async function ContaCriada() {
     password.value = "";
     rptpassword.value = "";
   }
-const { data } = await axios.post('/conta', {
-	  username,
-	  password
-  });
+// const { data } = await axios.post('/conta', {
+// 	  username,
+// 	  password
+//   });
 
-  console.log(data);
+//   console.log(data);
 }
 
 function CriacaoDaConta() {
@@ -88,22 +88,37 @@ async function create(event) {
     descricao: DescricaoValue,
     detalhamento: DetalhamentoValue,
   };
-  	recados.push(user);
-  	localStorage.setItem("recado", JSON.stringify(recados));
-  	JSON.parse(localStorage.getItem("recados"));
-	  const novaLinha = document.createElement("tr");
-	  novaLinha.id = recados[recados.length - 1].ID;
-	  novaLinha.innerHTML = `
-	  	  <th scope="row">${user.ID}</th>
-	  	  <td id="tddescricao${user.ID}">${user.descricao}</td>
+  const {data} = await axios.post('/recado', user);
+  
+	console.log(data);
+
+  recados.push(user);
+  const novaLinha = document.createElement("tr");
+  novaLinha.id = recados[recados.length - 1].ID;
+  novaLinha.innerHTML = `
+	   	  <th scope="row">${user.ID}</th>
+	   	  <td id="tddescricao${user.ID}">${user.descricao}</td>
 	  	  <td id="tddetalhamento${user.ID}">${user.detalhamento}</td>
-	 	  <td><button id="botaoapagar" onclick=Delete(${user.ID}) type="submit" class="btn btn-danger">Apagar</button><button id="botaoeditar" onclick=AbrirModal(${user.ID}) type="submit" class="btn btn-success" data-toggle="modal">Editar</button></td>`;
+	      <td><button id="botaoapagar" onclick=Delete(${user.ID}) type="submit" class="btn btn-danger">Apagar</button><button id="botaoeditar" onclick=AbrirModal(${user.ID}) type="submit" class="btn btn-success" data-toggle="modal">Editar</button></td>`;
 	  
 	    document.querySelector("#tabela>tbody").appendChild(novaLinha);
 
-	const {data} = await axios.post('/crud', user);
+  	// recados.push(user);
+  	// localStorage.setItem("recado", JSON.stringify(recados));
+  	// JSON.parse(localStorage.getItem("recados"));
+	  // const novaLinha = document.createElement("tr");
+	  // novaLinha.id = recados[recados.length - 1].ID;
+	  // novaLinha.innerHTML = `
+	  // 	  <th scope="row">${user.ID}</th>
+	  // 	  <td id="tddescricao${user.ID}">${user.descricao}</td>
+	  // 	  <td id="tddetalhamento${user.ID}">${user.detalhamento}</td>
+	 	//   <td><button id="botaoapagar" onclick=Delete(${user.ID}) type="submit" class="btn btn-danger">Apagar</button><button id="botaoeditar" onclick=AbrirModal(${user.ID}) type="submit" class="btn btn-success" data-toggle="modal">Editar</button></td>`;
+	  
+	  //   document.querySelector("#tabela>tbody").appendChild(novaLinha);
+
+	// const {data} = await axios.post('/recado', user);
   
-	console.log(data);
+	// console.log(data);
 }
 
 // function create() {
