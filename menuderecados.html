@@ -37,8 +37,8 @@
           <input id="editardescricao" placeholder="Editar Descrição" type="text">
           <p id="paragrafodetalhamento">Detalhamento:</p>
           <input type="text" id="editardetalhamento" placeholder="Editar Detalhamento">
-          <button id="salvaralteracoes" onclick="update(document.getElementById('editID').value)" type="button" class="btn btn-info">Salvar Alterações</button>
-          <button id="fechar" onclick=fechar() type="button" class="btn btn-danger">Cancelar</button>
+          <button id="salvaralteracoes" onclick="update(event,document.getElementById('editID').value)" type="button" class="btn btn-info">Salvar Alterações</button>
+          <button id="fechar" onclick=FecharModal() type="button" class="btn btn-danger">Cancelar</button>
       </div>
   
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
