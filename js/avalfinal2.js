@@ -71,6 +71,7 @@ async function acesso(event) {
   server=data;
   localStorage.sessao=JSON.stringify(server);
   if(data.token.length>20){
+  alert('Você está sendo conectado...')
   NovaAba("/menuderecados.html");
   }}
   catch{
